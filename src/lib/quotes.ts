@@ -1,0 +1,18 @@
+export const quotes = [
+  "Bakat memenangkan pertandingan, tetapi kerja sama tim dan kecerdasan memenangkan kejuaraan. – Michael Jordan",
+  "Sukses bukanlah kebetulan. Ia adalah kerja keras, ketekunan, pembelajaran, pengorbanan, dan yang terpenting, cinta akan apa yang Anda lakukan. – Pelé",
+  "Saya tidak bermain untuk memenangkan Ballon d'Or. Saya bermain untuk bahagia dan karena saya mencintai sepak bola. – Lionel Messi",
+  "Mimpimu bukanlah apa yang kamu lihat dalam tidurmu, melainkan apa yang membuatmu tidak bisa tidur. – Cristiano Ronaldo",
+  "Semakin sulit kemenangan, semakin besar kebahagiaan dalam meraihnya. – Pelé",
+  "Bakat alami itu penting, tapi kerja keras adalah hal yang membuat pemain menjadi hebat. – Cristiano Ronaldo",
+  "Saya selalu ingin menjadi lebih baik, dan saya tidak akan pernah puas dengan apa yang sudah saya capai. – Lionel Messi",
+  "Sepak bola adalah permainan tentang kesalahan. Siapa yang membuat paling sedikit kesalahan, dia yang menang. – Johan Cruyff",
+  "Kamu bisa mengatasi segala hal jika dan hanya jika kamu mencintai sesuatu dengan cukup. – Lionel Messi",
+  "Rasa sakit itu sementara. Menyerah itu selamanya. – Lance Armstrong",
+  "Kamu tidak bisa hanya mengandalkan bakat. Kamu harus bekerja keras dan terus belajar setiap hari. – Kylian Mbappé",
+  "Dalam sepak bola, tidak ada batas. Kamu selalu bisa berlatih dan berkembang menjadi lebih baik. – Neymar Jr",
+  "Kunci dari segalanya adalah mentalitas. Jika kamu percaya pada dirimu sendiri, kamu bisa mencapai apapun. – Zlatan Ibrahimovic",
+  "Kegagalan terjadi setiap saat. Itu terjadi pada setiap hari dalam latihan. Yang membuatmu lebih baik adalah bagaimana reaksi kamu terhadapnya. – Mia Hamm",
+  "Jangan pernah menyerah. Terus berusaha, dan keajaiban akan terjadi. – Mohamed Salah",
+  "Pemenang sejati adalah mereka yang tidak pernah berhenti mencoba, bahkan setelah gagal. – Andrea Pirlo",
+];

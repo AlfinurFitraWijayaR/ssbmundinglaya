@@ -9,7 +9,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Loader2, UploadCloud, FileImage } from "lucide-react";
+import { Loader2, UploadCloud, FileImage, Copy } from "lucide-react";
 import { toast } from "sonner";
 import imageCompression from "browser-image-compression";
 import { createClient } from "@supabase/supabase-js";
@@ -115,17 +115,57 @@ export function UploadPaymentDialog({
           </DialogDescription>
         </DialogHeader>
 
-        {/* Info Rekening Hardcoded (Placeholder) */}
-        <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 flex flex-col gap-1 mb-2">
-          <p className="text-xs font-semibold text-blue-600 uppercase tracking-widest">
-            Bank BCA
-          </p>
-          <p className="text-lg font-mono font-bold text-zinc-900">
-            123 456 7890
-          </p>
-          <p className="text-sm font-medium text-zinc-600">
-            a/n SSB Mundinglaya
-          </p>
+        {/* Info Rekening */}
+        <div className="grid grid-cols-2 gap-3 mb-2">
+          {/* BRI */}
+          <div className="bg-blue-50/50 p-3 rounded-xl border border-blue-100 flex flex-col gap-1">
+            <p className="text-[10px] font-semibold text-blue-600 uppercase tracking-widest">
+              Bank BRI
+            </p>
+            <div className="flex items-center justify-between gap-1">
+              <p className="text-sm font-mono font-bold text-zinc-900 truncate">
+                004601035252501
+              </p>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText("004601035252501");
+                  toast.success("Nomor rekening BRI disalin!");
+                }}
+                className="text-blue-400 hover:text-blue-600 p-1 transition-colors"
+                title="Salin Nomor"
+              >
+                <Copy className="w-4 h-4" />
+              </button>
+            </div>
+            <p className="text-[10px] font-medium text-zinc-600">
+              a/n Yoga Anggita Purwanto
+            </p>
+          </div>
+
+          {/* DANA */}
+          <div className="bg-sky-50/50 p-3 rounded-xl border border-sky-100 flex flex-col gap-1">
+            <p className="text-[10px] font-semibold text-sky-600 uppercase tracking-widest">
+              DANA
+            </p>
+            <div className="flex items-center justify-between gap-1">
+              <p className="text-sm font-mono font-bold text-zinc-900 truncate">
+                082317861172
+              </p>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(" 082317861172");
+                  toast.success("Nomor DANA disalin!");
+                }}
+                className="text-sky-400 hover:text-sky-600 p-1 transition-colors"
+                title="Salin Nomor"
+              >
+                <Copy className="w-4 h-4" />
+              </button>
+            </div>
+            <p className="text-[10px] font-medium text-zinc-600">
+              a/n Yoga Anggita Purwanto
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-col gap-4 py-2">

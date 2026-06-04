@@ -11,7 +11,6 @@ const programs = [
     description:
       "Pada usia ini, anak-anak akan kami kenalkan dengan sepak bola. Tujuannya tidak lain agar mereka merasa gembira dan merasakan pengalaman bermain secara tim yang menyenangkan.",
     image: "/hero-bg.png",
-    link: "https://chat.whatsapp.com/ChwU7cu8LkkBQwUq2h6tAh",
   },
   {
     title: "Usia Dasar",
@@ -19,7 +18,16 @@ const programs = [
     description:
       "Pada usia ini, anak-anak mulai masuk pada pengenalan. Fokus utama tetap pada suasana gembira dan menyenangkan namun perlahan mulai diperkenalkan juga pada prestasi.",
     image: "/hero-bg.png",
-    link: "https://chat.whatsapp.com/FeY99DojdMM3nWQlUGqHtY",
+    whatsappGroups: [
+      {
+        year: "7-8",
+        link: "https://chat.whatsapp.com/IGSv7RPLJWj7Ff0ZSBBgSt",
+      },
+      {
+        year: "9",
+        link: "https://chat.whatsapp.com/F6bW4EUVncN5baiqw0EhDy",
+      },
+    ],
   },
   {
     title: "Usia Menengah",
@@ -27,16 +35,42 @@ const programs = [
     description:
       "Pada usia ini, anak-anak mulai masuk pada fase pengembangan skill. Mereka akan dikenalkan pada pola permainan individu dan tim.",
     image: "/hero-bg.png",
-    link: "https://chat.whatsapp.com/D34ddVyWJ5ZHOWpz4jVGkE",
+    whatsappGroups: [
+      {
+        year: "10",
+        link: "https://chat.whatsapp.com/ISKXDv2VIq2JTjcawIt9mF",
+      },
+      {
+        year: "11",
+        link: "https://chat.whatsapp.com/ChwU7cu8LkkBQwUq2h6tAh",
+      },
+      {
+        year: "12",
+        link: "https://chat.whatsapp.com/FeY99DojdMM3nWQlUGqHtY",
+      },
+      {
+        year: "13",
+        link: "https://chat.whatsapp.com/D34ddVyWJ5ZHOWpz4jVGkE",
+      },
+    ],
   },
   {
     title: "Usia Mahir",
-    subtitle: "",
+    subtitle: "Kelompok Usia 14+",
     description:
       "Pada usia ini, fokus utamanya adalah kemampuan permainan secara kolektif dan individu demi prestasi. Dalam program, kami juga akan terus mengajarkan mengenai nilai-nilai profesionalitas, disiplin dan kemanusiaan seperti toleransi terhadap lawan dan teman.",
     image: "/hero-bg.png",
+    whatsappGroups: [
+      { year: "14", link: "https://chat.whatsapp.com/CTUcgbJFXFUKVNicUNH2BB" },
+      { year: "15", link: "https://chat.whatsapp.com/CGiCSMeWSlY7PQcEMbiNch" },
+    ],
   },
 ];
+
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+  return Math.abs(offset) * velocity;
+};
 
 export function Program() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -80,11 +114,22 @@ export function Program() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.4 }}
+              className="absolute inset-0 cursor-grab active:cursor-grabbing"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(e, { offset, velocity }) => {
+                const swipe = swipePower(offset.x, velocity.x);
+                if (swipe < -swipeConfidenceThreshold) {
+                  nextSlide();
+                } else if (swipe > swipeConfidenceThreshold) {
+                  prevSlide();
+                }
+              }}
             >
               {/* Background Image */}
               <div
@@ -126,24 +171,30 @@ export function Program() {
                 >
                   {programs[currentIndex].description}
                 </motion.p>
-                
-                {programs[currentIndex].link && (
-                  <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                    className="mt-6"
-                  >
-                    <Link
-                      href={programs[currentIndex].link}
-                      target="_blank"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#25D366] hover:bg-[#1ebd5a] text-white font-semibold rounded-full shadow-lg transition-all duration-300 hover:scale-105"
+
+                {programs[currentIndex].whatsappGroups &&
+                  programs[currentIndex].whatsappGroups.length > 0 && (
+                    <motion.div
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                      className="mt-6 flex flex-wrap gap-3 justify-center lg:justify-start"
                     >
-                      <MessageCircle className="w-5 h-5" />
-                      Gabung Grup WhatsApp
-                    </Link>
-                  </motion.div>
-                )}
+                      {programs[currentIndex].whatsappGroups.map(
+                        (group, idx) => (
+                          <Link
+                            key={idx}
+                            href={group.link}
+                            target="_blank"
+                            className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#25D366] hover:bg-[#1ebd5a] text-white text-xs font-semibold rounded-full shadow-lg transition-all duration-300 hover:scale-105"
+                          >
+                            <MessageCircle className="w-3 h-3" />
+                            KU {group.year} Tahun
+                          </Link>
+                        ),
+                      )}
+                    </motion.div>
+                  )}
               </div>
             </motion.div>
           </AnimatePresence>

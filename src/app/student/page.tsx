@@ -84,7 +84,10 @@ export default async function StudentDashboardPage() {
             {/* profile */}
             <Link href="/student/profile">
               <Avatar className="w-10 h-10 border-2 border-white/30 shadow-lg">
-                <AvatarImage src={student.avatarUrl || ""} />
+                <AvatarImage
+                  src={`/api/file/${student.avatarUrl}`}
+                  className="object-cover"
+                />
                 <AvatarFallback className="bg-[var(--color-brand-emerald)] text-white font-bold">
                   {student.fullName.charAt(0).toUpperCase()}
                 </AvatarFallback>

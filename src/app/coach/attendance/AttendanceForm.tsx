@@ -159,11 +159,6 @@ export function AttendanceForm({
                   {/* info siswa */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <Avatar className="border border-gray-200 shadow-sm">
-                        <AvatarFallback className="bg-[var(--color-brand-emerald)] text-white">
-                          {student.name.charAt(0).toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
                       <div className="flex flex-col">
                         <h3 className="font-bold text-gray-900 text-sm capitalize">
                           {student.name}

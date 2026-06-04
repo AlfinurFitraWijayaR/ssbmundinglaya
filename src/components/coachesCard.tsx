@@ -45,10 +45,11 @@ export function CoachesCard({ coach }: { coach: Coach }) {
         <div className="relative w-24 h-32 flex-shrink-0 bg-muted rounded-md overflow-hidden border-2 border-brand-gold/30">
           {coach.foto ? (
             <Image
-              src={`${process.env.NEXT_PUBLIC_BASE_CDN_URL}/${coach.foto}?width=150&height=150`}
+              src={`/api/file/${coach.foto}`}
               alt={coach.nama}
               fill
               className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
             <div className="flex items-center justify-center h-full text-muted-foreground bg-gray-100 dark:bg-zinc-800">
@@ -114,7 +115,7 @@ export function CoachesCard({ coach }: { coach: Coach }) {
               </p>
               {coach.cvFile ? (
                 <Link
-                  href={`/api/cv?file=${encodeURIComponent(coach.cvFile)}`}
+                  href={`/api/file/${coach.cvFile}`}
                   target="_blank"
                   className="text-xs font-semibold text-brand-gold underline truncate block"
                 >

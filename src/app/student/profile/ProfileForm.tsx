@@ -63,7 +63,7 @@ export function ProfileForm({
                   <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-[var(--color-brand-gold)] shadow-md bg-gray-100 flex items-center justify-center">
                     {student.avatarUrl ? (
                       <Image
-                        src={student.avatarUrl}
+                        src={`/api/file/${student.avatarUrl}`}
                         alt="Avatar"
                         width={100}
                         height={100}
@@ -88,6 +88,10 @@ export function ProfileForm({
                       {student.class?.className}
                     </span>
                   </p>
+                  <p className="text-sm text-zinc-500">
+                    Kode login:{" "}
+                    <span className="font-semibold">{profile.loginCode}</span>
+                  </p>
                 </div>
               </div>
 
@@ -104,24 +108,35 @@ export function ProfileForm({
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="birthPlace">Alamat</Label>
+                  <Label htmlFor="address">Alamat</Label>
                   <Input
-                    id="birthPlace"
-                    name="birthPlace"
-                    defaultValue={student.birthPlace || ""}
+                    id="address"
+                    name="address"
+                    defaultValue={student.address || ""}
                     className="bg-white border-gray-300"
                   />
                 </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phoneNumber">Nomor Telepon</Label>
-                <Input
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  type="tel"
-                  defaultValue={profile.phoneNumber || ""}
-                  className="bg-white border-gray-300"
-                />
+                <div className="space-y-2">
+                  <Label htmlFor="phoneNumber">Nomor Telepon</Label>
+                  <Input
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    type="tel"
+                    placeholder="cth: 08200000000"
+                    defaultValue={profile.phoneNumber || ""}
+                    className="bg-white border-gray-300"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="position">Posisi</Label>
+                  <Input
+                    id="position"
+                    name="position"
+                    placeholder="cth: striker"
+                    defaultValue={student.position || ""}
+                    className="bg-white border-gray-300"
+                  />
+                </div>
               </div>
             </CardContent>
           </Card>

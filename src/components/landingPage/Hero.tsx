@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 export default function HeroSection() {
   return (
@@ -42,6 +43,14 @@ export default function HeroSection() {
               className="w-full sm:w-auto px-8 py-4 bg-brand-gold text-white hover:bg-brand-gold/80 font-semibold text-sm rounded-lg transition-transform shadow-[0_0_20px_rgba(212,172,84,0.4)]"
             >
               Daftar Online
+            </Link>
+            <Link
+              href="/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-8 py-4  text-white hover:bg-brand-gold/20 font-semibold text-sm rounded-lg transition-transform shadow-[0_0_20px_rgba(212,172,84,0.4)]"
+            >
+              Masuk ke Sistem
             </Link>
           </div>
         </motion.div>

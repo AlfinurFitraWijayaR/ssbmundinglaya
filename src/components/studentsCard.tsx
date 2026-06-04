@@ -56,10 +56,12 @@ export function StudentsCard({ student }: { student: Student }) {
         <div className="relative w-24 h-32 flex-shrink-0 bg-muted rounded-md overflow-hidden border-2 border-brand-gold/30">
           {student.foto ? (
             <Image
-              src={`${student.foto}?width=150&height=150`}
+              src={`/api/file/${student.foto}`}
               alt={student.nama}
               fill
               className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
             />
           ) : (
             <div className="flex items-center justify-center h-full text-muted-foreground bg-gray-100 dark:bg-zinc-800">

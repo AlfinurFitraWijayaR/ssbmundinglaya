@@ -26,8 +26,8 @@ export default async function StudentProfilePage() {
       students: {
         with: {
           class: true,
-        }
-      }
+        },
+      },
     },
   });
 

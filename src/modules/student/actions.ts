@@ -28,7 +28,8 @@ export async function updateStudentProfile(formData: FormData) {
 
     const studentId = profile.students[0].id;
     const phoneNumber = formData.get("phoneNumber") as string;
-    const birthPlace = formData.get("birthPlace") as string;
+    const address = formData.get("address") as string;
+    const position = formData.get("position") as string;
 
     // Update the profile table for phone number
     if (phoneNumber !== profile.phoneNumber) {
@@ -42,7 +43,8 @@ export async function updateStudentProfile(formData: FormData) {
     await db
       .update(students)
       .set({
-        birthPlace: birthPlace || null,
+        address: address || null,
+        position: position || null,
       })
       .where(eq(students.id, studentId));
 

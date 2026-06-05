@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 import { Toaster } from "sonner";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
+import NextTopLoader from "nextjs-toploader";
 
 export default function RootLayout({
   children,
@@ -25,6 +26,17 @@ export default function RootLayout({
       <body
         className={`${geist.className} min-h-full flex flex-col overflow-x-hidden`}
       >
+        <NextTopLoader
+          color="var(--color-brand-gold)"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px var(--color-brand-gold),0 0 5px var(--color-brand-gold)"
+        />
         <TooltipProvider>{children}</TooltipProvider>
         <Toaster position="top-center" richColors theme="light" />
       </body>

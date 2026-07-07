@@ -39,7 +39,7 @@ export default async function SiswaPage({
     }
     if (year !== "all") {
       conditions.push(
-        sql`EXTRACT(YEAR FROM ${students.birthDate}) = ${Number(year)}`,
+        sql`EXTRACT(YEAR FROM ${students.birthDate})::text = ${year}`,
       );
     }
     conditions.push(eq(students.isActive, true));

@@ -303,3 +303,66 @@ export async function enrollStudentOnline(formData: FormData) {
     };
   }
 }
+
+export async function updateStudentAdmin(formData: FormData) {
+  try {
+    const studentId = formData.get("studentId") as string;
+    const fullName = formData.get("fullName") as string;
+    const nickname = formData.get("nickname") as string;
+    const classId = formData.get("classId") as string;
+    const birthDate = formData.get("birthDate") as string;
+    const birthPlace = formData.get("birthPlace") as string;
+    const address = formData.get("address") as string;
+    const position = formData.get("position") as string;
+    const isActiveStr = formData.get("isActive") as string;
+    const isActive = isActiveStr === "true";
+
+    if (!studentId || !fullName || !classId) {
+      return { success: false, error: "ID Siswa, Nama lengkap dan Kelas wajib diisi" };
+    }
+
+    // Get current student to see if we need to update profile
+    const currentStudent = await db.query.students.findFirst({
+      where: eq(students.id, studentId),
+    });
+
+    if (!currentStudent) {
+      return { success: false, error: "Siswa tidak ditemukan" };
+    }
+
+    // Update students table
+    await db
+      .update(students)
+      .set({
+        fullName,
+        nickname: nickname || null,
+        classId,
+        birthDate: birthDate || null,
+        birthPlace: birthPlace || null,
+        address: address || null,
+        position: position || null,
+        isActive,
+      })
+      .where(eq(students.id, studentId));
+
+    // Update profiles table if profileId exists
+    if (currentStudent.profileId && currentStudent.fullName !== fullName) {
+      await db
+        .update(profiles)
+        .set({ fullName })
+        .where(eq(profiles.id, currentStudent.profileId));
+    }
+
+    revalidatePath("/dashboard/student");
+    revalidatePath(`/dashboard/student/${currentStudent.slug}`);
+
+    return { success: true };
+  } catch (error: any) {
+    console.error("Gagal update siswa (admin):", error);
+    return {
+      success: false,
+      error: "Terjadi kesalahan saat mengupdate data siswa",
+    };
+  }
+}
+

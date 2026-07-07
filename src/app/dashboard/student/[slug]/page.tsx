@@ -9,6 +9,7 @@ import { eq, and, sql } from "drizzle-orm";
 import dayjs from "dayjs";
 import { notFound } from "next/navigation";
 import { AvatarUploaderAdmin } from "./AvatarUploaderAdmin";
+import { EditStudentModal } from "./EditStudentModal";
 
 export default async function StudentProfilePage({
   params,
@@ -22,10 +23,13 @@ export default async function StudentProfilePage({
     .select({
       id: students.id,
       name: students.fullName,
+      nickname: students.nickname,
       ku: classes.className,
+      classId: students.classId,
       position: students.position,
       address: students.address,
       birthDate: students.birthDate,
+      birthPlace: students.birthPlace,
       avatar: students.avatarUrl,
       slug: students.slug,
       isActive: students.isActive,
@@ -40,6 +44,12 @@ export default async function StudentProfilePage({
   }
 
   const student = studentData[0];
+
+  // Fetch classes for edit form
+  const rawClasses = await db.select().from(classes).orderBy(classes.className);
+  const allClasses = Array.from(
+    new Map(rawClasses.map((c) => [c.className, c])).values(),
+  );
 
   // Check if they are overdue
   const todayStr = dayjs().format("YYYY-MM-DD");
@@ -106,13 +116,7 @@ export default async function StudentProfilePage({
                 </Badge>
               )}
             </div>
-            <Button
-              className="w-full border-gray-300 text-zinc-700 hover:bg-gray-50"
-              variant="outline"
-              disabled
-            >
-              <Edit className="w-4 h-4 mr-2" /> Edit Profil (Segera)
-            </Button>
+            <EditStudentModal student={student} classes={allClasses} />
           </CardContent>
         </Card>
 
